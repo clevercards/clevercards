@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block scripts %}
-    <script src="{% static 'clevercards_app/main.js' %}" defer></script>
+    <script src="{% static 'clevercards_app/main.js' %}" type="module" defer></script>
 {% endblock scripts %}
 
 {% block title %}
@@ -55,19 +55,16 @@
                 </div>
                 <div class="sample-subject">
                 <h3>Choose a Subject</h3>
-                <input type="radio" id="mathematics" name="sample-post" value="Mathematics">
-                <label for="mathematics">Mathematics</label><br>
-                <input type="radio" id="biology" name="sample-post" value="Biology">
-                <label for="biology">Biology</label><br>
-                <input type="radio" id="chemistry" name="sample-post" value="Chemistry">
-                <label for="chemistry">Chemistry</label><br>
-                <input type="radio" id="physics" name="sample-post" value="Physics">
-                <label for="physics">Physics</label>
+                {% for obj in object_list %}
+                    <input type="radio" id="{{ obj }}" name="sample-post" value="{{ obj }}" data-pk="{{ obj.pk }}">
+                    <label for="{{ obj }}">{{ obj }}</label><br>
+                {% endfor %}
                 </div>
             </div>
             </fieldset>
             <button
-                class="btn btn-link btn-primary modal-button"
+                class="btn btn-link modal-button"
+                type="button"
                 id="myModalBtn"
                 data-toggle="modal"
                 data-target="#quizModal">
@@ -76,36 +73,3 @@
         </form>
     </header>
 {% endblock content %}
-
-<main>
-    
-
-    <!-- Make your questions form -->
-    <form action="" id="mcq_input">
-      <p>Make your own Multiple Choice Question</p>
-      <!-- Get question -->
-      <label for="question">Question</label>
-      <input id="question" type="text" name="question">
-      <!-- get options -->
-      <!-- how many options -->
-      <label for="#options">No. of options</label>
-      <input id="#options" type="number" min="2" max="10" name="#options" value="2">
-      <!-- the options -->
-      <div id="options">
-        <input class="option" type="text" id="right_answer" placeholder="Right Answer">
-        <input class="option" type="text" placeholder="Other Option">
-      </div>
-      <!-- get subject -->
-      <label for="subject">Subject</label>
-      <input id="subject" type="text" name="subject">
-      <!-- get tags -->
-      <label for="tag-list">No. of tags</label>
-      <input id="#tag-list" type="number" min="0" max="5" name="#tag-list" value="2">
-      <div id="tag-list">
-        <input class="tag-item" type="text">
-        <input class="tag-item" type="text">
-      </div>
-      <!-- submit -->
-      <input type="submit" id="post_submit">
-    </form>
-</main>

@@ -1,10 +1,10 @@
 from django.db import models
-from clevercards_app.models import Quiz
+from clevercards_app.models import Subject
 from django.contrib.auth.models import User
 
 # Create your models here.
 class Result(models.Model):
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     score = models.FloatField()
 
