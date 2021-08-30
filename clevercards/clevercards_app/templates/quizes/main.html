@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block scripts %}
+    <script src="{% static 'clevercards_app/main.js' %}" type="module" defer></script>
+{% endblock scripts %}
+
+{% block title %}
+    home
+{% endblock title %}
+
+{% block content %}
+    
+    <!-- Modal -->
+    <div class="modal fade" id="quizModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Start?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body" id="modal-body-confirm">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                    <button type="button" id="start-button" class="btn btn-success">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <h1>Math and Science Clever-Cards</h1>
+        <hr>
+        <!-- Introductory form -->
+        <form action="" id="introduction">
+            <p>
+                Create sample questions and test your ability in the fields of
+                Physics, Biology, Chemistry and Mathematics.
+            </p>
+            <fieldset>
+            <legend>Create Sample Test</legend>
+            <div class="choices">
+                <div class="sample-number">
+                <h3>Number of questions</h3>
+                <input type="radio" id="sample-number-1" name="sample-num" value="3">
+                <label for="sample-number-1">3</label><br>
+                <input type="radio" id="sample-number-2" name="sample-num" value="5">
+                <label for="sample-number-2">5</label><br>
+                <input type="radio" id="sample-number-3" name="sample-num" value="10">
+                <label for="sample-number-3">10</label>
+                </div>
+                <div class="sample-subject">
+                <h3>Choose a Subject</h3>
+                {% for obj in object_list %}
+                    <input type="radio" id="{{ obj }}" name="sample-post" value="{{ obj }}" data-pk="{{ obj.pk }}">
+                    <label for="{{ obj }}">{{ obj }}</label><br>
+                {% endfor %}
+                </div>
+            </div>
+            </fieldset>
+            <button
+                class="btn btn-link modal-button"
+                type="button"
+                id="myModalBtn"
+                data-toggle="modal"
+                data-target="#quizModal">
+                Create Sample Test
+            </button>
+        </form>
+    </header>
+{% endblock content %}
